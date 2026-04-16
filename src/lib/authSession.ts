@@ -34,5 +34,12 @@ export function getAuthUser(): StableUser | null {
 
 export function getDefaultPanelRoute(user?: StableUser | null) {
   const panel = user?.panel || 'investisseurpanel';
-  return `/${panel}`;
+
+  if (panel === 'investisseurpanel') return '/investisseurpanel/dashboard';
+  if (panel === 'societegestionpanel') return '/societegestionpanel/dashboard';
+  if (panel === 'adminpanel') return '/adminpanel/dashboard';
+  if (panel === 'personnelpanel') return '/personnelpanel';
+  if (panel === 'payspanel') return '/payspanel';
+
+  return '/investisseurpanel/dashboard';
 }
