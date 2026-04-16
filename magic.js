@@ -1,15 +1,14 @@
-import { Magic } from "magic-sdk";
-
-const customNodeOptions = {
-    rpcUrl: "https://rpc.testnet.moonbeam.network",
-    chainId: 1287,
+const disabledMagic = {
+  auth: {
+    loginWithCredential: async () => null,
+    loginWithSMS: async () => null,
+    logout: async () => true,
+  },
+  user: {
+    getMetadata: async () => ({ email: null, issuer: null, publicAddress: null }),
+    isLoggedIn: async () => false,
+    logout: async () => true,
+  },
 };
 
-const createMagic = (key, options) =>
-    typeof window != "undefined" && new Magic(key, options);
-
-export const magic = createMagic(
-    process.env.NEXT_PUBLIC_MAGIC_PUBLISHABLE_KEY,
-    { network: customNodeOptions }
-);
-
+export const magic = disabledMagic;
