@@ -3,6 +3,12 @@ import { NextRequest, NextResponse } from 'next/server';
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname === '/api/login') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/api/login-stable';
+    return NextResponse.rewrite(url);
+  }
+
   if (pathname === '/callback') {
     const url = request.nextUrl.clone();
     url.pathname = '/callback-stable';
@@ -31,5 +37,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/callback', '/investisseurpanel', '/societegestionpanel', '/adminpanel'],
+  matcher: ['/api/login', '/callback', '/investisseurpanel', '/societegestionpanel', '/adminpanel'],
 };
